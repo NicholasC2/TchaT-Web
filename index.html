@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
+        <title>TchaT</title>
+    </head>
+    <body>
+        <script>
+            const IP = "http://localhost:800"
+            const socket = io(IP)
+
+            let TchaTServerCheck;
+
+            socket.on("message", (msg) => {
+                if(msg["is-tchat-server"]) {
+                    TchaTServerCheck = true;
+                }
+            })
+
+            async function checkIPalert() {
+                if(!(await checkIP())) {
+                    alert("Invalid IP!")
+                    socket.close();
+                    socket.destroy();
+                }
+            }
+
+            checkIPalert()
+
+            async function checkIP() {
+                return new Promise((resolve) => {
+                    TchaTServerCheck = false;
+                    let TchaTServerCountdown = 10000;
+
+                    const interval = setInterval(()=>{
+                        if(TchaTServerCheck) {
+                            clearInterval(interval);
+                            resolve(true);
+                        }
+
+                        TchaTServerCountdown -= 500;
+
+                        if(TchaTServerCountdown <= 0) {
+                            if(!TchaTServerCheck) {
+                                resolve(false);
+                            }
+
+                            clearInterval(interval);
+                        }
+                    }, 500)
+                })
+            }
+        </script>
+    </body>
+</html>
