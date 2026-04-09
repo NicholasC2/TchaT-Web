@@ -77,20 +77,31 @@
             return;
         }
 
-        const keys = await generateKeyPair();
+        let sessionID = "";
 
         socket.emit("message", {
-            type: "account/create",
+            type: "account/login",
             data: {
-                username: "nick",
-                displayName: "NicholasC",
-                pubKey: keys.publicKey
+                username: "nick"
             }
         });
 
         socket.on("message", async (event) => {
-            if (event.type === "account/creationSuccessful") {
-                socket.emit("message", { type: "account/login", data: { username: "nick" } });
+            if (event.data.message === "Invalid username") {
+                const keys = await generateKeyPair();
+
+                socket.emit("message", {
+                    type: "account/create",
+                    data: {
+                        username: "nick",
+                        displayName: "NicholasC",
+                        pubKey: keys.publicKey
+                    }
+                });
+            }
+
+            if (event.type === "account/creationSuccessful" || event.type == "account/loginSuccessful") {
+                sessionID == event.data.sessionID;
             }
 
             if (event.type === "account/challengeSend") {
@@ -102,8 +113,6 @@
                         username: "nick"
                     }
                 });
-
-                console.log("Signature:", signature);
             }
         });
     })();
