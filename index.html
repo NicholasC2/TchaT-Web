@@ -1,141 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
-    <title>TchaT</title>
-</head>
-<body>
-<script>
-    async function generateKeyPair() {
-        const keyPair = await crypto.subtle.generateKey(
-            {
-                name: "RSASSA-PKCS1-v1_5",
-                modulusLength: 2048,
-                publicExponent: new Uint8Array([1, 0, 1]),
-                hash: "SHA-256",
-            },
-            true,
-            ["sign", "verify"]
-        );
-
-        const publicKey = await crypto.subtle.exportKey("spki", keyPair.publicKey);
-        const privateKey = await crypto.subtle.exportKey("pkcs8", keyPair.privateKey);
-
-        return {
-            publicKey: arrayBufferToBase64(publicKey),
-            privateKey: arrayBufferToBase64(privateKey)
-        };
-    }
-
-    function arrayBufferToBase64(buffer) {
-        let binary = '';
-        const bytes = new Uint8Array(buffer);
-        const chunkSize = 0x8000;
-        for (let i = 0; i < bytes.length; i += chunkSize) {
-            let chunk = bytes.subarray(i, i + chunkSize);
-            binary += String.fromCharCode(...chunk);
-        }
-        return btoa(binary);
-    }
-
-    function base64ToArrayBuffer(base64) {
-        const binary = atob(base64);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-        return bytes.buffer;
-    }
-
-    async function signChallenge(privateKeyB64, challengeB64) {
-        const privKey = await crypto.subtle.importKey(
-            "pkcs8",
-            base64ToArrayBuffer(privateKeyB64),
-            { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-            false,
-            ["sign"]
-        );
-
-        const challengeBuffer = base64ToArrayBuffer(challengeB64);
-        const signature = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", privKey, challengeBuffer);
-        return arrayBufferToBase64(signature);
-    }
-
-    const IP = "http://localhost:8000";
-    const socket = io(IP);
-
-    let TchaTServerCheck = false;
-
-    socket.on("message", (msg) => {
-        if (msg["is-tchat-server"]) TchaTServerCheck = true;
-    });
-
-    (async function() {
-        if (!(await checkIP())) {
-            alert("Invalid IP!");
-            socket.close();
-            return;
-        }
-
-        let sessionID = "";
-
-        socket.emit("message", {
-            type: "account/login",
-            data: {
-                username: "nick"
-            }
-        });
-
-        socket.on("message", async (event) => {
-            if (event.data.message === "Invalid username") {
-                const keys = await generateKeyPair();
-
-                socket.emit("message", {
-                    type: "account/create",
-                    data: {
-                        username: "nick",
-                        displayName: "NicholasC",
-                        pubKey: keys.publicKey
-                    }
-                });
-            }
-
-            if (event.type === "account/creationSuccessful" || event.type == "account/loginSuccessful") {
-                sessionID == event.data.sessionID;
-            }
-
-            if (event.type === "account/challengeSend") {
-                const signature = await signChallenge(keys.privateKey, event.data.value);
-                socket.emit("message", {
-                    type: "account/challengeRecieve",
-                    data: {
-                        signature,
-                        username: "nick"
-                    }
-                });
-            }
-        });
-    })();
-
-    async function checkIP() {
-        return new Promise((resolve) => {
-            TchaTServerCheck = false;
-            let countdown = 10000;
-
-            const interval = setInterval(() => {
-                if (TchaTServerCheck) {
-                    clearInterval(interval);
-                    resolve(true);
-                }
-
-                countdown -= 500;
-                if (countdown <= 0) {
-                    clearInterval(interval);
-                    resolve(TchaTServerCheck);
-                }
-            }, 500);
-        });
-    }
-</script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./colours.css">
+        <link rel="stylesheet" href="./layout.css">
+        <title>TchaT</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar">
+                <div class="navitem">
+                </div>
+            </div>
+            <div class="chat">
+                <div class="input">
+                    <input type="text">
+                    <button>Submit</button>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
