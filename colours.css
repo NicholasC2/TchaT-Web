@@ -13,6 +13,10 @@ body {
     color: #000000;
 }
 
+.input input::placeholder {
+    color: #424242;
+}
+
 .input button {
     background-color: #ccccff;
     color: #000000;
@@ -33,17 +37,21 @@ body {
     }
 
     .navbar {
-        background-color: #000022;
+        background-color: #41417b;
         color: #ffffff;
     }
 
     .input input {
-        background-color: #000088;
+        background-color: #6f6f7d;
         color: #ffffff;
+    }
+
+    .input input::placeholder {
+        color: #c7c7c7;
     }
     
     .input button {
-        background-color: #000077;
+        background-color: #4141ff;
         color: #ffffff;
     }
 }

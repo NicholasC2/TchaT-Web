@@ -1,10 +1,20 @@
 body {
-    width: calc(100vw - 16px);
-    height: calc(100vh - 16px);
+    width: 100%;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 .container {
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
 
     width: 100%;
@@ -21,7 +31,6 @@ body {
     aspect-ratio: 1 / 1;
 
     padding: 10px;
-    box-sizing: border-box;
 }
 
 .navitem * {
@@ -30,11 +39,10 @@ body {
 }
 
 .chat {
-    display: inline-flex;
+    display: flex;
     flex-direction: column-reverse;
 
     width: 100%;
-    box-sizing: border-box;
 }
 
 .input input {
@@ -44,7 +52,7 @@ body {
 }
 
 .input {
-    display: inline-flex;
+    display: flex;
     width: 100%;
 }
 
