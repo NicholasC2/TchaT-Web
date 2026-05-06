@@ -30,6 +30,13 @@ body {
     opacity: 50%;
 }
 
+.navitem > .tooltip {
+    background-color: lightgray;
+    border: 2px grey solid;
+
+    color: black;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #000033;
@@ -53,5 +60,12 @@ body {
     .input button {
         background-color: #4141ff;
         color: #ffffff;
+    }
+
+    .navitem > .tooltip {
+        background-color: grey;
+        border: 2px darkgrey solid;
+
+        color: black;
     }
 }
