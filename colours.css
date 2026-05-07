@@ -37,6 +37,18 @@ body {
     color: black;
 }
 
+.status.online {
+    background-color: #00ff00;
+}
+
+.status.offline {
+    background-color: #ff0000;
+}
+
+.status.away {
+    background-color: #ffff00;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #000033;
