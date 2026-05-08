@@ -1,71 +1,84 @@
+:root {
+    --color-bg-primary: #0f1720;
+    --color-bg-secondary: #1b2735;
+    --color-bg-tertiary: #243447;
+
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #b6c2cf;
+    --color-text-placeholder: #7f95aa;
+
+    --color-accent: #38bdf8;
+    --color-accent-hover: #0ea5e9;
+
+    --color-tooltip-bg: #d1d5db;
+    --color-tooltip-border: #9ca3af;
+    --color-tooltip-text: #111827;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-bg-primary: #4c6b88;
+        --color-bg-secondary: #395772;
+        --color-bg-tertiary: #2f4d66;
+
+        --color-text-primary: #eef4fa;
+        --color-text-secondary: #d4e0ea;
+        --color-text-placeholder: #b5c7d8;
+
+        --color-accent: #63a7d8;
+        --color-accent-hover: #4d95c7;
+
+        --color-tooltip-bg: #6b87a1;
+        --color-tooltip-border: #4d657d;
+        --color-tooltip-text: #f8fafc;
+    }
+}
+
 body {
-    background-color: #aaaaff;
-    color: #000000;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
 }
 
 .navbar {
-    background-color: #9999dd;
-    color: #000000;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
 }
 
-.input input {
-    background-color: #ddddff;
-    color: #000000;
+input {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+
+    border: 1px solid transparent;
 }
 
-.input input::placeholder {
-    color: #424242;
+input::placeholder {
+    color: var(--color-text-placeholder);
 }
 
-.input button {
-    background-color: #ccccff;
-    color: #000000;
-    
+input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+button {
+    background-color: var(--color-accent);
+    color: #ffffff;
+
     border: none;
-
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
 }
 
-.input button:hover {
-    opacity: 50%;
+button:hover {
+    background-color: var(--color-accent-hover);
 }
 
-.navitem > .tooltip {
-    background-color: lightgray;
-    border: 2px grey solid;
+.tooltip {
+    background-color: var(--color-tooltip-bg);
+    border: 2px solid var(--color-tooltip-border);
 
-    color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #000033;
-        color: #ffffff;
-    }
-
-    .navbar {
-        background-color: #41417b;
-        color: #ffffff;
-    }
-
-    .input input {
-        background-color: #6f6f7d;
-        color: #ffffff;
-    }
-
-    .input input::placeholder {
-        color: #c7c7c7;
-    }
-    
-    .input button {
-        background-color: #4141ff;
-        color: #ffffff;
-    }
-
-    .navitem > .tooltip {
-        background-color: grey;
-        border: 2px darkgrey solid;
-
-        color: black;
-    }
+    color: var(--color-tooltip-text);
 }
