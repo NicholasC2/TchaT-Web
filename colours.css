@@ -39,7 +39,7 @@ body {
     color: var(--color-text-primary);
 }
 
-.navbar {
+.sidebar {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-primary);
 }
@@ -74,11 +74,4 @@ button {
 
 button:hover {
     background-color: var(--color-accent-hover);
-}
-
-.tooltip {
-    background-color: var(--color-tooltip-bg);
-    border: 2px solid var(--color-tooltip-border);
-
-    color: var(--color-tooltip-text);
 }

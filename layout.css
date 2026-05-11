@@ -1,6 +1,8 @@
 body {
     width: 100%;
     margin: 0;
+
+    font-family: "Inter", system-ui, sans-serif;
 }
 
 html, body {
@@ -13,132 +15,88 @@ html, body {
     box-sizing: border-box;
 }
 
-.container {
+.app {
     display: flex;
-    flex-direction: row;
-
     width: 100%;
     height: 100%;
 }
 
-.navbar {
-    overflow: auto;
+.sidebar {
+    width: 300px;
+    height: 100%;
+    overflow-y: auto;
 
     scrollbar-width: thin;
-    scrollbar-color: #666 transparent; 
-
-    width: 50px;
-    height: 100%;
+    scrollbar-color: #666 transparent;
 }
 
-.navitem {
-    width: 100%;
-    aspect-ratio: 1 / 1;
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
+    width: 100%;
     padding: 10px;
 
     cursor: pointer;
+    transition: opacity 120ms ease, transform 120ms ease;
 }
 
-.navitem img {
-    width: 100%;
-    height: 100%;
+.sidebar-user:hover {
+    transform: translateY(-1px);
+    opacity: 0.5;
+}
+
+.sidebar-user__avatar {
+    width: 48px;
+    height: 48px;
 
     border-radius: 50%;
+    object-fit: cover;
 }
 
-.tooltip {
-    position: relative;
-
+.sidebar-user__content {
     display: flex;
     flex-direction: column;
-
-    pointer-events: none;
-
-    padding: 2px;
-    box-shadow: 0 0 10px #00000040;
-
-    transition: opacity 0.2s ease;
-    opacity: 0;
-
-    font-size: small;
-
-    border-radius: 10%;
+    gap: 4px;
 }
 
-*:has(.tooltip) {
-    position: relative;
-}
-
-*:hover > .tooltip {
-    opacity: 1;
-}
-
-.tooltip-row {
+.sidebar-user__status {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    gap: 6px;
 }
 
-.status {
-    display: inline-block;
-
+.status-indicator {
     width: 10px;
     height: 10px;
+
     border-radius: 50%;
-
-    margin-right: 2px;
-
     position: relative;
+
+    background: currentColor;
+
+    transform: translateZ(0);
 }
 
-.status::after {
-    position: absolute;
-    content: "";
-
-    width: 100%;
-    height: 100%;
-
-    border-radius: 50%;
-
-    background: radial-gradient(transparent 0%, transparent 50%, black 100%);
-}
-
-.status::before {
-    position: absolute;
-    content: "";
-
-    top: 10%;
-    right: 10%;
-
-    width: 50%;
-    height: 50%;
-
-    border-radius: 50%;
-
-    background-color: white;
-    background: radial-gradient(white 0%, transparent 100%);
-}
-
-.chat {
+.chat-panel {
     display: flex;
     flex-direction: column-reverse;
 
     width: 100%;
 }
 
-.input input {
+.chat-input input {
     outline: none;
     border: none;
     width: 100%;
 }
 
-.input {
+.chat-input {
     display: flex;
     width: 100%;
 }
 
-.input * {
+.chat-input * {
     padding: 10px;
 }
