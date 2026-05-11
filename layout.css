@@ -100,3 +100,27 @@ html, body {
 .chat-input * {
     padding: 10px;
 }
+
+.options-panel {
+    display: flex;
+    flex-direction: column;
+
+    width: 100px;
+
+    transition: width 120ms ease;
+
+    overflow: hidden;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+}
+
+.option * {
+    flex: 1;
+
+    width: auto;
+}

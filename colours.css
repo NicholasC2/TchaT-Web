@@ -44,6 +44,11 @@ body {
     color: var(--color-text-primary);
 }
 
+.options-panel {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
 input {
     background-color: var(--color-bg-tertiary);
     color: var(--color-text-primary);
