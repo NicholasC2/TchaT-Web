@@ -97,3 +97,21 @@ a:hover {
     color: var(--color-link-hover);
     text-decoration: underline;
 }
+
+.alert-success {
+    background-color: #14532d;
+    border: 1px solid #22c55e;
+    color: #dcfce7;
+}
+
+.alert-warn {
+    background-color: #78350f;
+    border: 1px solid #f59e0b;
+    color: #fef3c7;
+}
+
+.alert-error {
+    background-color: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fee2e2;
+}
