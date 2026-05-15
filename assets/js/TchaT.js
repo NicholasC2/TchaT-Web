@@ -2,6 +2,8 @@ const settings = loadSettings()
 
 const ws = new WebSocket(settings.serverIP)
 
+let SERVER_CONNECTED = false;
+
 const WS_ERROR_MESSAGES = {
     1001: "The server is going offline or you navigated away from the page.",
     1002: "Connection failed due to a protocol error.",
@@ -21,4 +23,10 @@ ws.onclose = (event) => {
         const friendlyMsg = WS_ERROR_MESSAGES[event.code] || "An unknown connection error occurred.";
         showAlert("error", friendlyMsg);
     }
+
+    SERVER_CONNECTED = false;
+};
+
+ws.onopen = ()=>{
+    SERVER_CONNECTED = true;
 };
