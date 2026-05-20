@@ -1,6 +1,6 @@
 const settings = loadSettings()
 
-const ws = new WebSocket(settings.serverIP)
+const ws = new WebSocket("ws://localhost:8080")
 
 let SERVER_CONNECTED = false;
 

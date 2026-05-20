@@ -6,11 +6,11 @@ if(!registerForm) {
     if(loginForm) {
         const usernameInput = loginForm.querySelector("input.username")
         
-        const submitButton = loginForm.querySelector("input.submit")
+        const submitButton = loginForm.querySelector(".submit")
 
         setInterval(()=>{
             if(SERVER_CONNECTED) {
-                submitButton.ariaDisabled = false;
+                submitButton.disabled = false;
             }
         }, 100)
     
@@ -21,13 +21,13 @@ if(!registerForm) {
         })
     }
 } else {
-    const usernameInput = loginForm.querySelector("input.username")
+    const usernameInput = registerForm.querySelector("input.username")
 
-    const submitButton = loginForm.querySelector("input.submit")
+    const submitButton = registerForm.querySelector(".submit")
 
     setInterval(()=>{
         if(SERVER_CONNECTED) {
-            submitButton.ariaDisabled = false;
+            submitButton.disabled = false;
         }
     }, 100)
     

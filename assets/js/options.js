@@ -1,5 +1,5 @@
 const defaultSettings = {
-    serverIP: "wss://localhost:8080"
+    null: null
 };
 
 function saveSettings(settings) {
